@@ -1,46 +1,34 @@
 #include<iostream>
 using namespace std;
-int binarysearch(int a[],int n,int k)
+int binarySearch(int arr[],int l,int r, int x)
 {
-   int i,c=0;
-   int m=n/2;
-   if(a[m]==k)
-       return m;
-   if(a[m]>k)
-   {
-   	for(i=m-1;m>=0;m--)
-   	{
-       		if(a[i]==k)
-          	return i;
-  	}
-   }
-   else
-   {
-      for(i=m+1;m<=n;m++)
+    if(r>=l)
     {
-       if(a[i]==k)
-           return i;
+        int mid = (l+r)/2;
+        if(arr[mid]==x)
+            return mid;
+        else if (arr[mid]>x)
+            return binarySearch(arr,l,mid-1,x);
+        else   return binarySearch(arr,mid+1,r,x);
     }
-   }  
-     return -1;
+    return -1;
 }
-int main(void)
+int main()
 {
-	int num,k,c,i,n,j;
-	cin>>num;
-	for(j=0;j<num;j++)
-	{
-    		cin>>n;
-    		int a[n];
-    		for(i=0;i<n;i++)
-    		{
-   			 cin>>a[i];
-    		}
-	cin>>k;
-	int r=binarysearch(a,n,k);
-	if(r==-1)
-   		cout<<"Not Present :"<<n<<endl;
-	else
-  		cout<<"Present: "<<r+1<<endl; 
-	}
-}
+    int n;
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {    
+         int size, key;
+        cin>>size;
+        int arr[size];
+        for(int j=0;j<size;j++)
+            cin>>arr[j];
+        cin>>key;
+        int ans=binarySearch(arr,0,size,key); 
+        if(ans==-1)
+            cout<<"Not Present : "<<size<<endl;
+        else
+            cout<<"Present : "<<ans+1<<endl;  
+    }  
+}  
